@@ -147,25 +147,25 @@ useEffect(() => {
   }
 }, []);
 
-  // function handleCurrentLocation() {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(async (postiion) => {
-  //       const { latitude, longitude } = postiion.coords;
-  //       try {
-  //         setLoadingCity(true);
-  //         const response = await axios.get(
-  //           `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
-  //         );
-  //         setTimeout(() => {
-  //           setLoadingCity(false);
-  //           setPlace(response.data.name);
-  //         }, 500);
-  //       } catch (error) {
-  //         setLoadingCity(false);
-  //       }
-  //     });
-  //   }
-  // }
+  function handleCurrentLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (postiion) => {
+        const { latitude, longitude } = postiion.coords;
+        try {
+          setLoadingCity(true);
+          const response = await axios.get(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`
+          );
+          setTimeout(() => {
+            setLoadingCity(false);
+            setPlace(response.data.name);
+          }, 500);
+        } catch (error) {
+          setLoadingCity(false);
+        }
+      });
+    }
+  }
   return (
     <>
       <nav className="shadow-sm  sticky top-0 left-0 z-50 bg-white dark:bg-black">
@@ -178,7 +178,7 @@ useEffect(() => {
           <section className="flex gap-2 items-center">
             <MdMyLocation
               title="Your Current Location"
-              // onClick={handleCurrentLocation}
+              onClick={handleCurrentLocation}
               className="text-2xl  text-gray-400 dark:text-white hover:opacity-80 cursor-pointer"
             />
             <MdOutlineLocationOn className="text-3xl dark:text-white text-slate-900" />
